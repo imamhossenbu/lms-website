@@ -34,7 +34,13 @@ export function FeatureNav() {
       { rootMargin: "-45% 0px -50% 0px" }
     );
     sections.forEach((s) => io.observe(s));
-    return () => io.disconnect();
+    // Landing on /features#id: scroll again once the layout has settled (the announcement bar animates in).
+    const target = FEATURES.some((f) => `#${f.id}` === window.location.hash) ? document.getElementById(window.location.hash.slice(1)) : null;
+    const t = target ? window.setTimeout(() => target.scrollIntoView({ block: "start" }), 400) : undefined;
+    return () => {
+      io.disconnect();
+      window.clearTimeout(t);
+    };
   }, []);
 
   const go = (id: string) => (e: React.MouseEvent) => {
@@ -45,7 +51,7 @@ export function FeatureNav() {
   };
 
   return (
-    <nav aria-label="Features" className="sticky top-20 z-30 border-b border-dash bg-white/90 backdrop-blur">
+    <nav aria-label="Features" className="sticky top-15 z-30 border-b border-dash bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-3 sm:px-6 lg:justify-center">
         {FEATURES.map(({ id, icon: Icon, title }) => {
           const on = id === active;

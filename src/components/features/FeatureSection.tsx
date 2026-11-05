@@ -23,7 +23,7 @@ export function FeatureSection({ featureId, index }: { featureId: string; index:
   const flip = index % 2 === 1;
 
   return (
-    <section id={feature.id} className={cn("relative scroll-mt-36 overflow-hidden", flip ? "bg-brand-orange-soft" : "bg-white")}>
+    <section id={feature.id} className={cn("relative scroll-mt-32 overflow-hidden", flip ? "bg-brand-orange-soft" : "bg-white")}>
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12">
         <motion.div
           className={cn("lg:col-span-5", flip && "lg:order-2")}

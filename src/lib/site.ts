@@ -12,11 +12,14 @@ export const signupUrl = (plan?: string, cycle?: "MONTHLY" | "YEARLY") => {
 };
 export const loginUrl = () => `${PANEL_URL}/login`;
 
-export const NAV_LINKS = [
-  { href: "/features", label: "Features" },
+/** Main navigation. `mega` = opens the features menu on desktop. */
+export const NAV_LINKS: { href: string; label: string; mega?: boolean }[] = [
+  { href: "/features", label: "Features", mega: true },
+  { href: "/#how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
-] as const;
+];
 
 /**
  * Lesson video played from the closing banner. Default: "A Male Teacher Giving Online Classes" by Diva Plavalaguna

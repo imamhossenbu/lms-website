@@ -10,7 +10,7 @@ import { FlowArrow } from "./steps/FlowArrow";
 /** "How it works": three step cards joined by arrows (desktop) and a trial CTA. */
 export function HowItWorks() {
   return (
-    <section className="relative overflow-hidden">
+    <section id="how-it-works" className="relative scroll-mt-24 overflow-hidden">
       <div className="absolute -left-40 -top-40 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6">
         <SectionHeading

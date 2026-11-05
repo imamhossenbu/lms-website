@@ -61,3 +61,20 @@ export async function getPlans(): Promise<Plan[]> {
     return [];
   }
 }
+
+/**
+ * The four selling points on a plan card, from the plan's real limits and features:
+ * "Create up to N courses", a feature new in this plan, "Up to N students", another new feature
+ * (falls back to the plan's own features when it adds nothing over the cheaper one).
+ */
+export function planHighlights(plan: Plan, plans: Plan[]): string[] {
+  const n = (v: number | null) => (v === null ? null : v.toLocaleString("en-US"));
+  const courses = n(plan.limits.courses) ? `Create up to ${n(plan.limits.courses)} courses` : "Unlimited courses";
+  const students = n(plan.limits.students) ? `Up to ${n(plan.limits.students)} students` : "Unlimited students";
+  const i = plans.findIndex((p) => p.id === plan.id);
+  const cheaper = i > 0 ? plans[i - 1] : undefined;
+  const own = FEATURE_LABELS.filter((f) => plan.features.includes(f.key));
+  const added = own.filter((f) => !cheaper?.features.includes(f.key));
+  const picks = (added.length ? added : own).slice(0, 2).map((f) => f.label);
+  return [courses, picks[0], students, picks[1]].filter((x): x is string => !!x);
+}

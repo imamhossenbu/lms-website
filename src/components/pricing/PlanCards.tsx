@@ -2,19 +2,22 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { yearlySaving, type Plan } from "@/lib/plans";
+import { CircleDollarSign } from "lucide-react";
+import type { Plan } from "@/lib/plans";
 import { CycleToggle } from "./CycleToggle";
 import { PlanCard } from "./PlanCard";
 
-/** Cycle toggle + plan cards (home teaser and /pricing). Shows a contact link when the plans couldn't load. */
+/** Cycle toggle + plan cards (home and /pricing). Empty state with a contact link when the plans couldn't load. */
 export function PlanCards({ plans }: { plans: Plan[] }) {
   const [cycle, setCycle] = useState<"MONTHLY" | "YEARLY">("MONTHLY");
-  const saving = Math.max(0, ...plans.map(yearlySaving));
 
   if (!plans.length)
     return (
       <div className="mx-auto max-w-lg rounded-2xl border border-dash bg-white p-8 text-center">
-        <p className="body-medium text-primary-500">Plans are taking a moment to load.</p>
+        <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-brand-orange-light text-brand-orange">
+          <CircleDollarSign className="h-6 w-6" />
+        </span>
+        <p className="body-medium text-primary-500 mt-4">Plans are taking a moment to load.</p>
         <p className="body-sm-regular text-primary-300 mt-2">
           Refresh the page, or{" "}
           <Link href="/contact?topic=SALES" className="text-brand-orange hover:underline">
@@ -28,11 +31,11 @@ export function PlanCards({ plans }: { plans: Plan[] }) {
   return (
     <div>
       <div className="flex justify-center">
-        <CycleToggle cycle={cycle} onChange={setCycle} saving={saving} />
+        <CycleToggle cycle={cycle} onChange={setCycle} />
       </div>
-      <div className={`mt-10 grid gap-5 sm:grid-cols-2 ${plans.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
+      <div className={`mt-12 grid items-stretch gap-6 sm:grid-cols-2 ${plans.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
         {plans.map((p, i) => (
-          <PlanCard key={p.id} plan={p} cycle={cycle} index={i} />
+          <PlanCard key={p.id} plan={p} plans={plans} cycle={cycle} index={i} />
         ))}
       </div>
     </div>

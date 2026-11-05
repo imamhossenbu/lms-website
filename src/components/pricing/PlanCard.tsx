@@ -2,60 +2,86 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { ArrowRight, Building2, Check, Crown, Gem, Rocket, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
-import { FEATURE_LABELS, LIMIT_LABELS, formatLimit, formatPrice, type Plan } from "@/lib/plans";
+import { formatPrice, planHighlights, yearlySaving, type Plan } from "@/lib/plans";
 import { signupUrl } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { ToneBadge } from "@/components/ui/ToneBadge";
+import { Spotlight } from "@/components/motion/Spotlight";
+import { PlanPrice } from "./PlanPrice";
 
-/** One plan: name, tagline, price for the cycle, limits, features and a trial CTA (pre-selects the plan). */
-export function PlanCard({ plan, cycle, index = 0 }: { plan: Plan; cycle: "MONTHLY" | "YEARLY"; index?: number }) {
+/** Icon per plan position (cheapest first); extra plans reuse the last one. */
+const PLAN_ICONS: LucideIcon[] = [Rocket, Building2, Crown, Gem];
+
+interface PlanCardProps {
+  plan: Plan;
+  /** All plans shown (cheapest first) — for the icon and "what's new" points. */
+  plans: Plan[];
+  cycle: "MONTHLY" | "YEARLY";
+  index?: number;
+}
+
+/** One plan: icon, name, tagline, price for the cycle, four selling points and a trial button (pre-selects the plan). */
+export function PlanCard({ plan, plans, cycle, index = 0 }: PlanCardProps) {
   const yearly = cycle === "YEARLY";
-  const price = yearly ? plan.priceYearly / 12 : plan.priceMonthly;
-  const included = FEATURE_LABELS.filter((f) => plan.features.includes(f.key));
+  const Icon = PLAN_ICONS[Math.min(index, PLAN_ICONS.length - 1)];
+  const saving = yearlySaving(plan);
+  const popular = plan.highlighted;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.35, delay: index * 0.07 }}
-      className={cn("relative flex h-full flex-col rounded-2xl border bg-white p-6", plan.highlighted ? "border-brand-orange shadow-xl shadow-brand-orange/10" : "border-dash")}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -6 }}
+      className={cn("h-full", popular && "lg:-my-2")}
     >
-      {plan.highlighted && (
-        <ToneBadge tone="orange" size="sm" className="absolute -top-3 left-6">
-          Most popular
-        </ToneBadge>
-      )}
-      <h3 className="heading-h5 text-primary-500">{plan.name}</h3>
-      <p className="body-sm-regular text-primary-300 mt-1.5 min-h-10">{plan.tagline}</p>
-      <div className="mt-5 flex items-end gap-1">
-        <span className="heading-h1-bold text-primary-500">{formatPrice(price)}</span>
-        <span className="body-sm-regular text-primary-300 mb-1.5">/ month</span>
-      </div>
-      <p className="body-xsm-regular text-primary-300 mt-1">{yearly ? `${formatPrice(plan.priceYearly)} billed yearly` : "Billed monthly"}</p>
+      <Spotlight className="rounded-3xl">
+        <div
+          className={cn(
+            "relative flex h-full flex-col rounded-3xl border bg-white p-7 transition-shadow duration-300",
+            popular ? "border-brand-orange bg-gradient-to-b from-brand-orange-soft to-white shadow-2xl shadow-brand-orange/15" : "border-dash shadow-sm hover:shadow-xl hover:shadow-primary-500/5"
+          )}
+        >
+          {popular && (
+            <span className="absolute -top-3.5 right-8 rounded-full bg-brand-orange px-4 py-1.5 body-sm-medium text-white shadow-md shadow-brand-orange/30 whitespace-nowrap">
+              Most Popular
+            </span>
+          )}
+          <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-orange-light text-brand-orange">
+            <Icon className="h-7 w-7" />
+          </span>
+          <h3 className="heading-h3-bold tracking-tight text-primary-500 mt-5">{plan.name}</h3>
+          <p className="body-l-regular text-primary-300 mt-2 min-h-14">{plan.tagline}</p>
 
-      <ButtonLink href={signupUrl(plan.id, cycle)} variant={plan.highlighted ? "primary" : "secondary"} className="mt-6 w-full">
-        {plan.trialDays > 0 ? `Start ${plan.trialDays}-day free trial` : "Get started"}
-      </ButtonLink>
+          <div className="mt-6">
+            <PlanPrice amount={yearly ? Math.round(plan.priceYearly / 12) : plan.priceMonthly} />
+            <p className="body-sm-regular text-primary-300 mt-1 min-h-5">
+              {yearly ? `${formatPrice(plan.priceYearly)} billed yearly${saving ? ` · save ${saving}%` : ""}` : "Billed monthly"}
+            </p>
+          </div>
 
-      <ul className="mt-6 space-y-2.5 border-t border-dash pt-5">
-        {LIMIT_LABELS.map((l) => (
-          <li key={l.key} className="flex items-center justify-between gap-3 body-sm-regular">
-            <span className="text-primary-400">{l.label}</span>
-            <span className="body-sm-medium text-primary-500">{formatLimit(plan.limits[l.key], l.unit)}</span>
-          </li>
-        ))}
-      </ul>
-      <ul className="mt-5 space-y-2.5 border-t border-dash pt-5">
-        {included.map((f) => (
-          <li key={f.key} className="flex items-center gap-2.5 body-sm-regular text-primary-500">
-            <Check className="h-4 w-4 shrink-0 text-green" />
-            {f.label}
-          </li>
-        ))}
-      </ul>
+          <ul className="mt-6 flex-1 space-y-3.5">
+            {planHighlights(plan, plans).map((line) => (
+              <li key={line} className="flex items-center gap-3 body-regular text-primary-400">
+                <Check className="h-5 w-5 shrink-0 text-brand-orange" strokeWidth={2.5} />
+                {line}
+              </li>
+            ))}
+          </ul>
+
+          <ButtonLink
+            href={signupUrl(plan.id, cycle)}
+            variant={popular ? "primary" : "secondary"}
+            size="lg"
+            icon={<ArrowRight className="h-4 w-4" />}
+            className="mt-8 h-14 w-full"
+          >
+            Start free trial
+          </ButtonLink>
+        </div>
+      </Spotlight>
     </motion.div>
   );
 }

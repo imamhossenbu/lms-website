@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { getPlans } from "@/lib/plans";
 import { Hero } from "@/components/home/Hero";
 import { TrustedBy } from "@/components/home/trusted/TrustedBy";
@@ -22,18 +21,15 @@ export default async function HomePage() {
       <FeatureGrid />
       <HowItWorks />
       <Showcase />
-      <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="Pricing" title="Simple plans that grow with you" subtitle="Every plan includes courses, quizzes, assignments and payments. Pick the size that fits." />
-        <div className="mt-10">
-          <PlanCards plans={plans} />
+      <section className="relative overflow-hidden">
+        <div className="absolute -left-40 top-20 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
+        <div className="absolute -bottom-40 -right-40 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
+        <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6">
+          <SectionHeading eyebrow="Simple, transparent pricing" title="Choose the perfect plan" highlight="plan" subtitle="Start with a free trial and upgrade anytime. No hidden fees." />
+          <div className="mt-10">
+            <PlanCards plans={plans} />
+          </div>
         </div>
-        <p className="text-center body-sm-regular text-primary-300 mt-8">
-          Compare every limit and feature on the{" "}
-          <Link href="/pricing" className="text-brand-orange hover:underline">
-            pricing page
-          </Link>
-          .
-        </p>
       </section>
       <Faq />
       <FinalCta />

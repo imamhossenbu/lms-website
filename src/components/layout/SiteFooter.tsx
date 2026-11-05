@@ -20,7 +20,6 @@ const SOCIAL_BTN =
 export function SiteFooter() {
   return (
     <footer className="relative isolate overflow-hidden bg-gradient-to-b from-brand-orange-light via-white to-brand-orange-light">
-      <Waves className="bottom-auto top-0 rotate-180 opacity-60" />
       <Waves />
       <div className="mx-auto max-w-7xl px-4 pb-40 pt-20 sm:px-6">
         <div className="grid gap-12 lg:grid-cols-12">

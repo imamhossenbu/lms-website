@@ -3,10 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, CalendarDays, CircleCheck, Headphones, Zap } from "lucide-react";
-import { cn } from "@/lib/cn";
 import { signupUrl } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { PerkList } from "@/components/shared/PerkList";
 import { EASE_OUT } from "@/components/motion/presets";
 
 const PERKS = [
@@ -44,21 +44,7 @@ export function CtaCopy() {
         </ButtonLink>
       </motion.div>
 
-      <ul className="mt-9 flex flex-wrap items-center gap-y-3">
-        {PERKS.map(({ icon: Icon, label }, i) => (
-          <motion.li
-            key={label}
-            className={cn("flex items-center gap-2.5 pr-5", i > 0 && "border-l border-dash pl-5")}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, ease: EASE_OUT, delay: 0.5 + i * 0.1 }}
-          >
-            <Icon className="h-6 w-6 shrink-0 text-brand-orange" />
-            <span className="body-medium whitespace-nowrap text-primary-500">{label}</span>
-          </motion.li>
-        ))}
-      </ul>
+      <PerkList perks={PERKS} className="mt-9" />
     </div>
   );
 }

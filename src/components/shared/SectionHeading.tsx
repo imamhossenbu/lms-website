@@ -19,6 +19,10 @@ interface SectionHeadingProps {
   underline?: boolean;
   subtitle?: string;
   align?: "center" | "left";
+  /** Heading level: "h1" for a page hero. */
+  as?: "h1" | "h2";
+  /** Animate on mount instead of on scroll-in (for content at the top of a page). */
+  onMount?: boolean;
   className?: string;
 }
 
@@ -42,10 +46,10 @@ function Swoosh() {
 }
 
 /** Pill eyebrow + large title (optional orange highlight / underline) + intro line, used at the top of each section. */
-export function SectionHeading({ eyebrow, eyebrowIcon, title, highlight, highlightOnNewLine, underline, subtitle, align = "center", className }: SectionHeadingProps) {
+export function SectionHeading({ eyebrow, eyebrowIcon, title, highlight, highlightOnNewLine, underline, subtitle, align = "center", as = "h2", onMount = false, className }: SectionHeadingProps) {
   const at = highlight ? title.indexOf(highlight) : -1;
   return (
-    <Stagger className={cn("max-w-3xl", align === "center" ? "mx-auto text-center" : "text-left", className)} stagger={0.1}>
+    <Stagger className={cn("max-w-3xl", align === "center" ? "mx-auto text-center" : "text-left", className)} stagger={0.1} onMount={onMount}>
       {eyebrow && (
         <StaggerItem>
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-orange-light px-4 py-1.5 body-sm-medium text-brand-orange whitespace-nowrap">
@@ -54,7 +58,7 @@ export function SectionHeading({ eyebrow, eyebrowIcon, title, highlight, highlig
           </span>
         </StaggerItem>
       )}
-      <StaggerItem as="h2" className="heading-section text-primary-500 mt-4">
+      <StaggerItem as={as} className="heading-section text-primary-500 mt-4">
         {at >= 0 ? (
           <>
             {title.slice(0, at)}

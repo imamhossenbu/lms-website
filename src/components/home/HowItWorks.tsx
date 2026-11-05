@@ -12,7 +12,7 @@ export function HowItWorks() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute -left-40 -top-40 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
-      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-24 sm:px-6">
         <SectionHeading
           eyebrow="How it works"
           title="Get your online academy up and running in 3 simple steps"

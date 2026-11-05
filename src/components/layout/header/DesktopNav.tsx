@@ -10,8 +10,8 @@ import { NAV_LINKS } from "@/lib/site";
 import { FeaturesMenu } from "./FeaturesMenu";
 
 /**
- * Centre navigation, editorial style: each item carries a small orange index number, and an orange line runs
- * along the header's bottom edge under the hovered item (or the current page). "Features" opens the mega menu
+ * Centre navigation: an orange line runs along the header's bottom edge under the hovered item (or the current
+ * page). "Features" opens the mega menu
  * (hover, click or keyboard; Esc / outside click closes it).
  */
 export function DesktopNav() {
@@ -48,12 +48,11 @@ export function DesktopNav() {
   return (
     <div ref={wrapRef} className="relative hidden h-full lg:block" onMouseLeave={() => setHover(null)}>
       <nav className="flex h-full items-stretch" aria-label="Main">
-        {NAV_LINKS.map((l, i) => {
+        {NAV_LINKS.map((l) => {
           const on = lineAt === l.href;
           const cls = cn("group relative flex h-full items-center gap-1.5 px-4 body-sm-medium transition-colors", on ? "text-brand-orange" : "text-primary-500 hover:text-brand-orange");
           const body = (
             <>
-              <span className="body-2xsm-regular -mt-2 font-semibold text-brand-orange opacity-60 tabular-nums">{String(i + 1).padStart(2, "0")}</span>
               <span>{l.label}</span>
               {l.mega && (
                 <motion.span animate={{ rotate: menu ? 180 : 0 }} transition={{ duration: 0.2 }}>

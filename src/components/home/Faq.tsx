@@ -14,7 +14,7 @@ import { FaqItem } from "./faq/FaqItem";
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="relative overflow-hidden">
+    <section id="faq" className="relative scroll-mt-24 overflow-hidden">
       <div className="absolute -right-40 bottom-0 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
         <SectionHeading eyebrow="Frequently asked questions" title="Have questions? We've got answers" highlight="answers" subtitle="Everything you need to know about EduPro, in one place." className="max-w-4xl" />

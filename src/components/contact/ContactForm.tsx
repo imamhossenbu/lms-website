@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
@@ -15,21 +15,43 @@ import { SIZES, TOPICS, contactSchema, type ContactValues } from "./contactSchem
 
 const selectCls = "w-full h-11 rounded-lg border bg-white px-3 body-sm-regular text-primary-500 outline-none transition-all focus:border-brand-orange";
 
-/** Contact / demo form → POST /saas/public/contact. `?topic=DEMO|SALES|…` pre-selects the topic. Render inside <Suspense>. */
+const asTopic = (v: string | null) => (TOPICS.some((t) => t.value === v) ? (v as ContactValues["topic"]) : null);
+
+/**
+ * Contact / demo form → POST /saas/public/contact. The topic is kept in sync with `?topic=DEMO|SALES|…` both ways
+ * (topic cards on the page change it, and picking a topic updates the URL). Render inside <Suspense>.
+ */
 export function ContactForm() {
   const params = useSearchParams();
-  const initialTopic = TOPICS.some((t) => t.value === params.get("topic")) ? (params.get("topic") as ContactValues["topic"]) : "DEMO";
+  const router = useRouter();
+  const pathname = usePathname();
+  const urlTopic = asTopic(params.get("topic"));
+  const initialTopic = urlTopic ?? "DEMO";
   const [sent, setSent] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactValues>({
     resolver: zodResolver(contactSchema),
     mode: "onTouched",
     defaultValues: { name: "", email: "", phone: "", institutionName: "", studentCount: "", topic: initialTopic, message: "", website: "" },
   });
+
+  // URL → form (topic cards / back button).
+  useEffect(() => {
+    if (urlTopic) setValue("topic", urlTopic, { shouldValidate: true });
+  }, [urlTopic, setValue]);
+
+  const topicField = register("topic");
+  const onTopicChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    void topicField.onChange(e);
+    const q = new URLSearchParams(params.toString());
+    q.set("topic", e.target.value);
+    router.replace(`${pathname}?${q.toString()}`, { scroll: false });
+  };
 
   const onSubmit = async (values: ContactValues) => {
     const id = toast.loading("Sending your message...", { description: "This only takes a moment." });
@@ -51,7 +73,7 @@ export function ContactForm() {
   return (
     <AnimatePresence mode="wait">
       {sent !== null ? (
-        <motion.div key="done" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="rounded-2xl border border-dash bg-white p-8 text-center">
+        <motion.div key="done" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="py-6 text-center">
           <CheckCircle2 className="mx-auto h-12 w-12 text-green" />
           <h2 className="heading-h4 text-primary-500 mt-4">Thanks{sent ? `, ${sent}` : ""}!</h2>
           <p className="body-regular text-primary-300 mt-2">Your message is with our team. We&apos;ll reply by email within one working day.</p>
@@ -60,7 +82,7 @@ export function ContactForm() {
           </button>
         </motion.div>
       ) : (
-        <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4 rounded-2xl border border-dash bg-white p-6 sm:p-8">
+        <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} noValidate onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <InputField id="contact-name" label="Your name" required placeholder="e.g. Nusrat Jahan" autoComplete="name" error={errors.name?.message} {...register("name")} />
             <InputField id="contact-email" label="Work email" required type="email" placeholder="you@school.edu.bd" autoComplete="email" error={errors.email?.message} {...register("email")} />
@@ -72,7 +94,7 @@ export function ContactForm() {
               <label htmlFor="contact-topic" className="mb-1.5 block body-sm-regular text-primary-400">
                 What would you like to talk about? <span className="text-red">*</span>
               </label>
-              <select id="contact-topic" className={cn(selectCls, errors.topic ? "border-red" : "border-dash")} {...register("topic")}>
+              <select id="contact-topic" className={cn(selectCls, errors.topic ? "border-red" : "border-dash")} {...topicField} onChange={onTopicChange}>
                 {TOPICS.map((t) => (
                   <option key={t.value} value={t.value}>
                     {t.label}

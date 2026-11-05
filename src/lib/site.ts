@@ -17,6 +17,7 @@ export const NAV_LINKS: { href: string; label: string; mega?: boolean }[] = [
   { href: "/features", label: "Features", mega: true },
   { href: "/#how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
+  { href: "/blog", label: "Blog" },
   { href: "/#faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ];

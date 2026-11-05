@@ -41,7 +41,7 @@ export function DesktopNav() {
     };
   }, [menu]);
 
-  const activeHref = NAV_LINKS.find((l) => (l.mega ? pathname.startsWith("/features") : !l.href.includes("#") && pathname === l.href))?.href ?? null;
+  const activeHref = NAV_LINKS.find((l) => (l.mega ? pathname.startsWith("/features") : !l.href.includes("#") && (pathname === l.href || pathname.startsWith(`${l.href}/`))))?.href ?? null;
   const lineAt = hover ?? activeHref;
 
   return (

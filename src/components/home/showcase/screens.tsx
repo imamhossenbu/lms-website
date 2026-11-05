@@ -6,6 +6,7 @@ import {
   Award,
   BadgeCheck,
   Banknote,
+  BarChart3,
   BookOpen,
   Calculator,
   CalendarDays,
@@ -14,13 +15,18 @@ import {
   FlaskConical,
   Globe,
   Laptop,
+  KeyRound,
   ListChecks,
+  MessageSquare,
   Palette,
+  Pin,
   Radio,
   Receipt,
+  ShieldCheck,
   Target,
   TrendingUp,
   Undo2,
+  UserCog,
   Users,
   Video,
   Wallet,
@@ -151,10 +157,95 @@ function PaymentsScreen() {
   );
 }
 
+
+function CommunityScreen() {
+  return (
+    <ScreenShell
+      title="Community"
+      subtitle="Questions, answers and discussions from your students."
+      action="New post"
+      stats={[
+        { icon: MessageSquare, label: "Posts this week", value: "148", note: "+26 vs last week", tone: "blue" },
+        { icon: BadgeCheck, label: "Answered", value: "92%", note: "Avg. 2h to answer", tone: "green" },
+        { icon: ShieldCheck, label: "Reports open", value: "1", note: "Moderation queue", tone: "orange" },
+      ]}
+      tabs={["Latest", "Unanswered", "Pinned"]}
+      searchPlaceholder="Search posts"
+      footer="Showing 5 of 148 posts"
+    >
+      <MockListRow index={0} thumbIcon={Pin} thumbClass="from-brand-orange to-yellow" title="Welcome! Read before posting" meta={[{ icon: MessageSquare, text: "12 replies" }, { icon: Users, text: "Admin" }]} status="Pinned" statusTone="orange" />
+      <MockListRow index={1} thumbIcon={Atom} thumbClass="from-blue to-purple" title="Why does acceleration stay constant here?" meta={[{ icon: MessageSquare, text: "6 replies" }, { icon: Users, text: "Rafiq A." }]} status="Answered" statusTone="green" />
+      <MockListRow index={2} thumbIcon={Calculator} thumbClass="from-blue to-green" title="Shortcut for quadratic factorisation?" meta={[{ icon: MessageSquare, text: "9 replies" }, { icon: Users, text: "Mim A." }]} status="Answered" statusTone="green" />
+      <MockListRow index={3} thumbIcon={FlaskConical} thumbClass="from-purple to-red" title="Organic naming rules — any tips?" meta={[{ icon: MessageSquare, text: "2 replies" }, { icon: Users, text: "Tania I." }]} status="Open" statusTone="blue" />
+      <MockListRow index={4} thumbIcon={Globe} thumbClass="from-green to-blue" title="Speaking practice partners" meta={[{ icon: MessageSquare, text: "15 replies" }, { icon: Users, text: "Sakib H." }]} status="Open" statusTone="blue" />
+    </ScreenShell>
+  );
+}
+
+function AnalyticsScreen() {
+  return (
+    <ScreenShell
+      title="Analytics"
+      subtitle="Enrolments, revenue and progress across your academy."
+      action="Export CSV"
+      stats={[
+        { icon: Users, label: "New students", value: "326", note: "+14% this month", tone: "blue" },
+        { icon: Banknote, label: "Revenue", value: "৳4.8L", note: "+22% this month", tone: "green" },
+        { icon: TrendingUp, label: "Completion", value: "78%", note: "+5% vs last term", tone: "purple" },
+      ]}
+      tabs={["Courses", "Students", "Instructors", "Revenue"]}
+      searchPlaceholder="Filter courses"
+      footer="Last 30 days · updated just now"
+    >
+      <MockListRow index={0} thumbIcon={Laptop} thumbClass="from-blue to-purple" title="HSC Physics Complete Course" meta={[{ icon: Users, text: "318 students" }, { icon: TrendingUp, text: "84% completion" }]} status="Top course" statusTone="green" />
+      <MockListRow index={1} thumbIcon={Calculator} thumbClass="from-blue to-green" title="SSC Math" meta={[{ icon: Users, text: "427 students" }, { icon: TrendingUp, text: "76% completion" }]} status="+18%" statusTone="green" />
+      <MockListRow index={2} thumbIcon={FlaskConical} thumbClass="from-purple to-red" title="HSC Chemistry" meta={[{ icon: Users, text: "264 students" }, { icon: TrendingUp, text: "71% completion" }]} status="+9%" statusTone="green" />
+      <MockListRow index={3} thumbIcon={Globe} thumbClass="from-green to-blue" title="Spoken English for Beginners" meta={[{ icon: Users, text: "196 students" }, { icon: TrendingUp, text: "62% completion" }]} status="Steady" statusTone="blue" />
+      <MockListRow index={4} thumbIcon={BarChart3} thumbClass="from-yellow to-brand-orange" title="Drop-off: Lesson 7, Graphic Design" meta={[{ icon: Users, text: "41 students" }, { icon: TrendingUp, text: "Needs attention" }]} status="Review" statusTone="yellow" />
+    </ScreenShell>
+  );
+}
+
+function TeamScreen() {
+  return (
+    <ScreenShell
+      title="Team"
+      subtitle="Invite teachers and staff with the right permissions."
+      action="Invite member"
+      stats={[
+        { icon: Users, label: "Team members", value: "14", note: "3 invited this month", tone: "blue" },
+        { icon: UserCog, label: "Custom roles", value: "4", note: "Teacher, Accountant…", tone: "purple" },
+        { icon: KeyRound, label: "2FA enabled", value: "100%", note: "All admins", tone: "green" },
+      ]}
+      tabs={["Members", "Roles", "Activity"]}
+      searchPlaceholder="Search members"
+      footer="Showing 5 of 14 members"
+    >
+      <MockListRow index={0} thumbIcon={KeyRound} thumbClass="from-brand-orange to-red" title="Tanvir Hasan · Owner" meta={[{ icon: ShieldCheck, text: "Full access" }, { icon: Clock, text: "Active now" }]} status="Owner" statusTone="orange" />
+      <MockListRow index={1} thumbIcon={UserCog} thumbClass="from-blue to-purple" title="Nusrat Jahan · Admin" meta={[{ icon: ShieldCheck, text: "2FA on" }, { icon: Clock, text: "5 min ago" }]} status="Admin" statusTone="blue" />
+      <MockListRow index={2} thumbIcon={Atom} thumbClass="from-green to-blue" title="Rafiq Ahmed · Physics teacher" meta={[{ icon: BookOpen, text: "3 courses" }, { icon: Clock, text: "1 h ago" }]} status="Teacher" statusTone="green" />
+      <MockListRow index={3} thumbIcon={Banknote} thumbClass="from-yellow to-brand-orange" title="Sadia Islam · Accountant" meta={[{ icon: Receipt, text: "Payments only" }, { icon: Clock, text: "Yesterday" }]} status="Custom role" statusTone="purple" />
+      <MockListRow index={4} thumbIcon={Users} thumbClass="from-purple to-red" title="arif@greenvalley.edu" meta={[{ icon: CalendarDays, text: "Invited Nov 3" }, { icon: Clock, text: "Pending" }]} status="Invited" statusTone="yellow" />
+    </ScreenShell>
+  );
+}
+
 export const SHOWCASE_SCREENS: Record<ShowcaseId, React.ComponentType> = {
   courses: CoursesScreen,
   live: LiveScreen,
   assess: AssessScreen,
   certificates: CertificatesScreen,
   payments: PaymentsScreen,
+};
+
+/** Preview screen for each feature section on /features (keyed by feature id). */
+export const FEATURE_SCREENS: Record<string, React.ComponentType> = {
+  courses: CoursesScreen,
+  live: LiveScreen,
+  assessments: AssessScreen,
+  certificates: CertificatesScreen,
+  payments: PaymentsScreen,
+  community: CommunityScreen,
+  analytics: AnalyticsScreen,
+  team: TeamScreen,
 };

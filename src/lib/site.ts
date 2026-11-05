@@ -17,3 +17,14 @@ export const NAV_LINKS = [
   { href: "/pricing", label: "Pricing" },
   { href: "/contact", label: "Contact" },
 ] as const;
+
+/**
+ * Lesson video played from the closing banner. Default: "A Male Teacher Giving Online Classes" by Diva Plavalaguna
+ * on Pexels (free to use under the Pexels license) — set NEXT_PUBLIC_DEMO_VIDEO_URL to the real EduPro demo.
+ */
+export const DEMO_VIDEO = {
+  src: process.env.NEXT_PUBLIC_DEMO_VIDEO_URL || "https://videos.pexels.com/video-files/6985689/6985689-hd_1920_1080_25fps.mp4",
+  /** Frame from the default video; set NEXT_PUBLIC_DEMO_VIDEO_POSTER together with the URL. */
+  poster: process.env.NEXT_PUBLIC_DEMO_VIDEO_POSTER || "/images/cta-lesson-poster.jpg",
+  title: "A live lesson on EduPro",
+};

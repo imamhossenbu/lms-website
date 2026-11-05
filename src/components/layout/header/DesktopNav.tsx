@@ -10,8 +10,7 @@ import { NAV_LINKS } from "@/lib/site";
 import { FeaturesMenu } from "./FeaturesMenu";
 
 /**
- * Centre navigation: an orange line runs along the header's bottom edge under the hovered item (or the current
- * page). "Features" opens the mega menu
+ * Centre navigation: the hovered item and the current page turn orange. "Features" opens the mega menu
  * (hover, click or keyboard; Esc / outside click closes it).
  */
 export function DesktopNav() {
@@ -59,7 +58,6 @@ export function DesktopNav() {
                   <ChevronDown className="h-3.5 w-3.5" />
                 </motion.span>
               )}
-              {on && <motion.span layoutId="nav-line" className="absolute inset-x-3 -bottom-px h-0.5 bg-brand-orange" transition={{ type: "spring", stiffness: 420, damping: 36 }} />}
             </>
           );
 

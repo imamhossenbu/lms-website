@@ -13,7 +13,7 @@ import { DesktopNav } from "./header/DesktopNav";
 import { MobileMenu } from "./header/MobileMenu";
 
 /**
- * Announcement strip + sticky, full-width header: logo, nav (sliding orange edge line,
+ * Announcement strip + sticky, full-width header: logo, nav (orange for the current page,
  * features mega menu), Sign in and Start free trial. Once you scroll it gets more compact and glassy, and a thin
  * orange line along its bottom shows how far down the page you are. Slide-down menu on small screens.
  */

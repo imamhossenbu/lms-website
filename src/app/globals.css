@@ -45,6 +45,9 @@
   --color-yellow-bg: #fffbeb;
   --color-yellow-14: rgba(217, 119, 6, 0.14);
   --color-gray-bg: #f1f5f9;
+  /* Map accents (division colours on the marketing map) */
+  --color-teal: #14b8a6;
+  --color-pink: #ec4899;
 }
 
 :root {
@@ -91,6 +94,8 @@
   --dash-border: #E2E8F0;
   --dash-text: #0F172A;
   --dash-muted: #64748B;
+  --color-teal: #14b8a6;
+  --color-pink: #ec4899;
 }
 
 html,

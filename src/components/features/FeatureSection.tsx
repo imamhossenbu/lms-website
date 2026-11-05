@@ -11,6 +11,7 @@ import { ButtonLink } from "@/components/ui/ButtonLink";
 import { ToneIcon } from "@/components/shared/ToneIcon";
 import { EASE_OUT } from "@/components/motion/presets";
 import { FEATURE_SCREENS } from "@/components/home/showcase/screens";
+import { PaymentLogos } from "@/components/shared/PaymentLogos";
 
 /**
  * One feature on /features: number, tinted icon, title, summary and the key points beside a live-looking preview of
@@ -55,6 +56,7 @@ export function FeatureSection({ featureId, index }: { featureId: string; index:
               </motion.li>
             ))}
           </ul>
+          {feature.id === "payments" && <PaymentLogos align="left" label="" className="mt-6" />}
           <ButtonLink href={signupUrl()} variant="secondary" className="mt-8" icon={<ArrowRight className="h-4 w-4" />}>
             Try it free
           </ButtonLink>

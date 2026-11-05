@@ -5,10 +5,13 @@ import { motion } from "framer-motion";
 import { MoreVertical, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { ToneBadge, type Tone } from "@/components/ui/ToneBadge";
+import { PaymentLogo, type PaymentMethod } from "@/components/ui/PaymentLogo";
 
 export interface MockMeta {
   icon: LucideIcon;
   text: string;
+  /** Show this payment provider's logo instead of the icon + text. */
+  logo?: PaymentMethod;
 }
 
 interface MockListRowProps {
@@ -38,12 +41,16 @@ export function MockListRow({ thumbIcon: Thumb, thumbClass, title, meta, status,
       <div className="min-w-0 flex-1">
         <span className="body-sm-medium text-primary-500 block truncate">{title}</span>
         <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
-          {meta.map(({ icon: Icon, text }) => (
-            <span key={text} className="inline-flex items-center gap-1 body-2xsm-regular text-primary-300 whitespace-nowrap">
-              <Icon className="h-3 w-3" />
-              {text}
-            </span>
-          ))}
+          {meta.map(({ icon: Icon, text, logo }) =>
+            logo ? (
+              <PaymentLogo key={text} method={logo} size="xs" />
+            ) : (
+              <span key={text} className="inline-flex items-center gap-1 body-2xsm-regular text-primary-300 whitespace-nowrap">
+                <Icon className="h-3 w-3" />
+                {text}
+              </span>
+            )
+          )}
         </div>
       </div>
       <ToneBadge tone={statusTone} size="sm">

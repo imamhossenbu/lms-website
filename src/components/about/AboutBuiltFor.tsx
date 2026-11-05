@@ -2,26 +2,28 @@
 
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, CreditCard, Globe, Smartphone, Video, Wallet } from "lucide-react";
+import { Check, Globe, Video, type LucideIcon } from "lucide-react";
+import { PaymentLogo, type PaymentMethod } from "@/components/ui/PaymentLogo";
 import { EASE_OUT } from "@/components/motion/presets";
 
 const POINTS = [
-  "Collect fees with bKash and SSLCommerz — or Stripe for students abroad",
+  "Collect fees with bKash and SSLCommerz (cards, Nagad, internet banking) — or Stripe for students abroad",
   "Live classes on the Zoom or Google Meet accounts you already have",
   "Your academy's own name, logo, colours and domain",
   "Certificates students can verify online with a code",
   "Roles for teachers, accountants and admins, with two-factor sign-in",
 ];
-const CHIPS = [
-  { icon: Wallet, label: "bKash", x: "8%", y: "12%" },
-  { icon: CreditCard, label: "SSLCommerz", x: "52%", y: "4%" },
-  { icon: Video, label: "Zoom", x: "62%", y: "44%" },
-  { icon: Video, label: "Google Meet", x: "4%", y: "52%" },
-  { icon: Globe, label: "Your domain", x: "34%", y: "78%" },
-  { icon: Smartphone, label: "Any device", x: "70%", y: "82%" },
+const CHIPS: { x: string; y: string; logo?: PaymentMethod; icon?: LucideIcon; label?: string }[] = [
+  { logo: "bkash", x: "6%", y: "9%" },
+  { logo: "sslcommerz", x: "50%", y: "4%" },
+  { logo: "nagad", x: "60%", y: "29%" },
+  { logo: "stripe", x: "8%", y: "38%" },
+  { icon: Video, label: "Zoom", x: "62%", y: "56%" },
+  { icon: Video, label: "Google Meet", x: "5%", y: "68%" },
+  { icon: Globe, label: "Your domain", x: "38%", y: "83%" },
 ];
 
-/** "Built for academies in Bangladesh": checklist beside floating chips of the tools academies use. */
+/** "Built for academies in Bangladesh": checklist beside floating chips of the tools academies use (real payment logos). */
 export function AboutBuiltFor() {
   const reduce = useReducedMotion();
   return (
@@ -43,9 +45,9 @@ export function AboutBuiltFor() {
 
       <div className="relative h-96 overflow-hidden rounded-3xl border border-dash bg-gradient-to-br from-brand-orange-light via-white to-blue-14">
         <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-orange-20 blur-3xl" aria-hidden />
-        {CHIPS.map(({ icon: Icon, label, x, y }, i) => (
+        {CHIPS.map(({ icon: Icon, label, logo, x, y }, i) => (
           <motion.span
-            key={label}
+            key={logo ?? label}
             className="absolute"
             style={{ left: x, top: y }}
             initial={{ opacity: 0, scale: 0.6 }}
@@ -58,10 +60,16 @@ export function AboutBuiltFor() {
               transition={{ duration: 4 + i * 0.4, repeat: Infinity, ease: "easeInOut" }}
               className="inline-flex items-center gap-2.5 whitespace-nowrap rounded-2xl border border-white bg-white/90 px-4 py-3 shadow-xl shadow-brand-orange/10 backdrop-blur"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-orange to-brand-orange-hover text-white">
-                <Icon className="h-4 w-4" />
-              </span>
-              <span className="body-sm-medium text-primary-500">{label}</span>
+              {logo ? (
+                <PaymentLogo method={logo} size="md" />
+              ) : (
+                <>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-orange to-brand-orange-hover text-white">
+                    {Icon && <Icon className="h-4 w-4" />}
+                  </span>
+                  <span className="body-sm-medium text-primary-500">{label}</span>
+                </>
+              )}
             </motion.span>
           </motion.span>
         ))}

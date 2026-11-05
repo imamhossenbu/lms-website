@@ -140,7 +140,7 @@ function PaymentsScreen() {
       subtitle="Every order, refund and payout in one place."
       action="Create coupon"
       stats={[
-        { icon: Banknote, label: "Revenue this month", value: "৳4.8L", note: "+22% vs last month", tone: "green" },
+        { icon: Banknote, label: "Revenue (month)", value: "৳4.8L", note: "+22% vs last month", tone: "green" },
         { icon: Receipt, label: "Paid orders", value: "312", note: "+41 this week", tone: "blue" },
         { icon: Undo2, label: "Refunds", value: "1.2%", note: "Low and steady", tone: "orange" },
       ]}
@@ -148,11 +148,11 @@ function PaymentsScreen() {
       searchPlaceholder="Search orders"
       footer="Showing 5 of 312 orders"
     >
-      <MockListRow index={0} thumbIcon={Wallet} thumbClass="from-red to-purple" title="৳2,500 · HSC Physics" meta={[{ icon: Receipt, text: "bKash" }, { icon: CalendarDays, text: "Today" }]} status="Paid" statusTone="green" />
-      <MockListRow index={1} thumbIcon={Wallet} thumbClass="from-blue to-green" title="৳1,800 · SSC Math" meta={[{ icon: Receipt, text: "SSLCommerz" }, { icon: CalendarDays, text: "Today" }]} status="Paid" statusTone="green" />
-      <MockListRow index={2} thumbIcon={Wallet} thumbClass="from-green to-blue" title="৳3,000 · Spoken English" meta={[{ icon: Receipt, text: "Nagad" }, { icon: CalendarDays, text: "Yesterday" }]} status="Paid" statusTone="green" />
-      <MockListRow index={3} thumbIcon={Wallet} thumbClass="from-purple to-red" title="৳1,500 · Graphic Design" meta={[{ icon: Receipt, text: "bKash" }, { icon: CalendarDays, text: "Nov 3" }]} status="Pending" statusTone="blue" />
-      <MockListRow index={4} thumbIcon={Wallet} thumbClass="from-yellow to-brand-orange" title="৳2,200 · HSC Chemistry" meta={[{ icon: Receipt, text: "Stripe" }, { icon: CalendarDays, text: "Nov 3" }]} status="Refunded" statusTone="yellow" />
+      <MockListRow index={0} thumbIcon={Wallet} thumbClass="from-red to-purple" title="৳2,500 · HSC Physics" meta={[{ icon: Receipt, text: "bKash", logo: "bkash" }, { icon: CalendarDays, text: "Today" }]} status="Paid" statusTone="green" />
+      <MockListRow index={1} thumbIcon={Wallet} thumbClass="from-blue to-green" title="৳1,800 · SSC Math" meta={[{ icon: Receipt, text: "SSLCommerz", logo: "sslcommerz" }, { icon: CalendarDays, text: "Today" }]} status="Paid" statusTone="green" />
+      <MockListRow index={2} thumbIcon={Wallet} thumbClass="from-green to-blue" title="৳3,000 · Spoken English" meta={[{ icon: Receipt, text: "Nagad", logo: "nagad" }, { icon: CalendarDays, text: "Yesterday" }]} status="Paid" statusTone="green" />
+      <MockListRow index={3} thumbIcon={Wallet} thumbClass="from-purple to-red" title="৳1,500 · Graphic Design" meta={[{ icon: Receipt, text: "bKash", logo: "bkash" }, { icon: CalendarDays, text: "Nov 3" }]} status="Pending" statusTone="blue" />
+      <MockListRow index={4} thumbIcon={Wallet} thumbClass="from-yellow to-brand-orange" title="৳2,200 · HSC Chemistry" meta={[{ icon: Receipt, text: "Stripe", logo: "stripe" }, { icon: CalendarDays, text: "Nov 3" }]} status="Refunded" statusTone="yellow" />
     </ScreenShell>
   );
 }

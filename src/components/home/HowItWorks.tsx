@@ -5,6 +5,7 @@ import { signupUrl } from "@/lib/site";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { StepCard } from "./steps/StepCard";
+import { FlowArrow } from "./steps/FlowArrow";
 
 /** "How it works": three step cards joined by arrows (desktop) and a trial CTA. */
 export function HowItWorks() {
@@ -28,7 +29,7 @@ export function HowItWorks() {
               </li>
               {i < STEPS.length - 1 && (
                 <li className="hidden shrink-0 list-none items-center justify-center lg:flex" aria-hidden>
-                  <ArrowRight className="h-6 w-6 text-brand-orange" />
+                  <FlowArrow />
                 </li>
               )}
             </React.Fragment>

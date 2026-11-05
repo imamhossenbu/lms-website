@@ -27,10 +27,10 @@ export function DashboardMock() {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <MockKpiCard icon={Users} tone="green" value="1,248" label="Students" />
-          <MockKpiCard icon={PlayCircle} tone="blue" value="24" label="Courses" />
-          <MockKpiCard icon={CalendarDays} tone="purple" value="12" label="Live Classes" />
-          <MockKpiCard icon={Award} tone="yellow" value="986" label="Certificates" />
+          <MockKpiCard icon={Users} tone="green" value={1248} label="Students" index={0} />
+          <MockKpiCard icon={PlayCircle} tone="blue" value={24} label="Courses" index={1} />
+          <MockKpiCard icon={CalendarDays} tone="purple" value={12} label="Live Classes" index={2} />
+          <MockKpiCard icon={Award} tone="yellow" value={986} label="Certificates" index={3} />
         </div>
         <div className="grid gap-3 lg:grid-cols-9">
           <EnrolmentChart className="lg:col-span-4" />

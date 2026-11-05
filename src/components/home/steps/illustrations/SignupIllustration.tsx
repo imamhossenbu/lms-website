@@ -1,7 +1,7 @@
 import React from "react";
-import { MousePointer2 } from "lucide-react";
 import { Logo } from "@/components/layout/Logo";
 import { MiniWindow } from "@/components/ui/MiniWindow";
+import { ClickingCursor } from "@/components/motion/ClickingCursor";
 
 /** Step 1: the sign-up form (logo, two fields, the orange button being clicked). */
 export function SignupIllustration() {
@@ -19,7 +19,7 @@ export function SignupIllustration() {
           <span className="block h-6 w-full rounded-md bg-slate-100" />
           <span className="block h-6 w-full rounded-md bg-slate-100" />
           <span className="relative block h-6 w-full rounded-md bg-gradient-to-r from-brand-orange to-brand-orange-hover">
-            <MousePointer2 className="absolute -bottom-3 right-2 h-5 w-5 fill-white text-primary-500" />
+            <ClickingCursor className="absolute -bottom-3 right-2" />
           </span>
         </div>
       </MiniWindow>

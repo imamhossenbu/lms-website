@@ -25,7 +25,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={aeonik.variable}>
-      <body className={`${aeonik.className} antialiased min-h-screen bg-white font-sans text-primary-500`}>
+      {/* Browser extensions add attributes to <body> before hydration; ignore those. */}
+      <body className={`${aeonik.className} antialiased min-h-screen bg-white font-sans text-primary-500`} suppressHydrationWarning>
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

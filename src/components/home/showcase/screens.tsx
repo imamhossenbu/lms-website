@@ -62,7 +62,7 @@ function LiveScreen() {
       subtitle="Schedule and run classes on Zoom or Google Meet."
       action="Schedule class"
       stats={[
-        { icon: Radio, label: "Live right now", value: "2", note: "142 students joined", tone: "red" },
+        { icon: Radio, label: "Live right now", value: "2", note: "142 joined now", tone: "red" },
         { icon: CalendarDays, label: "This week", value: "18", note: "+4 vs last week", tone: "blue" },
         { icon: Users, label: "Avg. attendance", value: "91%", note: "+6% this month", tone: "green" },
       ]}

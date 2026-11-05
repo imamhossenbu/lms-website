@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -133,6 +134,13 @@ export function ContactForm() {
           <PrimaryButton type="submit" size="lg" isLoading={isSubmitting} disabled={isSubmitting} className="w-full sm:w-auto" icon={<Send className="h-4 w-4" />}>
             {isSubmitting ? "Sending..." : "Send message"}
           </PrimaryButton>
+          <p className="body-xsm-regular text-primary-300">
+            We use your details only to reply to you. See our{" "}
+            <Link href="/privacy" className="text-brand-orange hover:underline">
+              Privacy Policy
+            </Link>
+            .
+          </p>
         </motion.form>
       )}
     </AnimatePresence>

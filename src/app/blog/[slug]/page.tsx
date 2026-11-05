@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
-    openGraph: { type: "article", title: post.title, description: post.excerpt, publishedTime: post.publishedAt, authors: [post.authorName], ...(post.coverUrl && { images: [post.coverUrl] }) },
+    openGraph: { type: "article", title: post.title, description: post.excerpt, publishedTime: post.publishedAt, authors: [post.authorName] },
   };
 }
 

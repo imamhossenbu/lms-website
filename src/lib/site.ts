@@ -1,4 +1,6 @@
 /** Where the website links to and reads from (set per environment). */
+/** This website's public address (canonical URLs, sitemap, share images). */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3002").replace(/\/$/, "");
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4077").replace(/\/$/, "");
 export const PANEL_URL = (process.env.NEXT_PUBLIC_PANEL_URL || "http://localhost:3000").replace(/\/$/, "");
 

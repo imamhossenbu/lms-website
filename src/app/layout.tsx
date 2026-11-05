@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 
@@ -17,9 +18,15 @@ const aeonik = localFont({
   display: "swap",
 });
 
+const DESCRIPTION = "EduPro is the all-in-one LMS for schools, coaching centres and training institutes: courses, live classes, quizzes, certificates and payments in one place.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: { default: "EduPro — Run your academy online", template: "%s · EduPro" },
-  description: "EduPro is the all-in-one LMS for schools, coaching centres and training institutes: courses, live classes, quizzes, certificates and payments in one place.",
+  description: DESCRIPTION,
+  applicationName: "EduPro",
+  openGraph: { type: "website", siteName: "EduPro", locale: "en_US", description: DESCRIPTION },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

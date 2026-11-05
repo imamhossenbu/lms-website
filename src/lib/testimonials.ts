@@ -1,4 +1,4 @@
-import { API_URL } from "./site";
+import { API_URL, HAS_API } from "./site";
 
 /** A published testimonial, managed by the platform owner in the Owner Console › Testimonials. */
 export interface Testimonial {
@@ -13,6 +13,7 @@ export interface Testimonial {
 
 /** Server-side; refreshed every minute. Empty when none are published or the API is down. */
 export async function getTestimonials(): Promise<Testimonial[]> {
+  if (!HAS_API) return [];
   try {
     const res = await fetch(`${API_URL}/saas/public/testimonials`, { next: { revalidate: 60 } });
     if (!res.ok) return [];

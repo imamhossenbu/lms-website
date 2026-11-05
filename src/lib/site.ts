@@ -1,8 +1,19 @@
-/** Where the website links to and reads from (set per environment). */
-/** This website's public address (canonical URLs, sitemap, share images). */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3002").replace(/\/$/, "");
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4077").replace(/\/$/, "");
-export const PANEL_URL = (process.env.NEXT_PUBLIC_PANEL_URL || "http://localhost:3000").replace(/\/$/, "");
+const DEV = process.env.NODE_ENV !== "production";
+const clean = (u: string) => u.replace(/\/$/, "");
+
+/**
+ * Where the website links to and reads from (set per environment). In development they default to the local
+ * servers; in production a missing value means "not online yet" — the site then skips the API (empty states)
+ * and sends sign-up / sign-in buttons to the contact page instead of a dead localhost link.
+ */
+/** This website's public address (canonical URLs, sitemap, share images). On Vercel it falls back to the project's production domain. */
+export const SITE_URL = clean(
+  process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3002")
+);
+export const API_URL = clean(process.env.NEXT_PUBLIC_API_URL || (DEV ? "http://localhost:4077" : ""));
+export const PANEL_URL = clean(process.env.NEXT_PUBLIC_PANEL_URL || (DEV ? "http://localhost:3000" : ""));
+/** The backend API is configured (false = plans, blog, testimonials and the contact form are offline). */
+export const HAS_API = API_URL !== "";
 
 /** Panel sign-up, optionally with a plan and billing cycle pre-selected. */
 export const signupUrl = (plan?: string, cycle?: "MONTHLY" | "YEARLY") => {
@@ -10,9 +21,10 @@ export const signupUrl = (plan?: string, cycle?: "MONTHLY" | "YEARLY") => {
   if (plan) q.set("plan", plan);
   if (cycle) q.set("cycle", cycle);
   const s = q.toString();
+  if (!PANEL_URL) return "/contact?topic=DEMO";
   return `${PANEL_URL}/signup${s ? `?${s}` : ""}`;
 };
-export const loginUrl = () => `${PANEL_URL}/login`;
+export const loginUrl = () => (PANEL_URL ? `${PANEL_URL}/login` : "/contact?topic=SUPPORT");
 
 /** Main navigation. `mega` = opens the features menu on desktop. */
 export const NAV_LINKS: { href: string; label: string; mega?: boolean }[] = [

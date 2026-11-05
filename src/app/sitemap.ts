@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { API_URL, SITE_URL } from "@/lib/site";
+import { API_URL, HAS_API, SITE_URL } from "@/lib/site";
 import type { BlogList } from "@/lib/blog";
 
 export const revalidate = 3600;
@@ -19,6 +19,7 @@ const PAGES: { path: string; priority: number; changeFrequency: MetadataRoute.Si
 /** Every published post (all pages of the public blog API, plus the featured one). Empty if the API is down. */
 async function blogPosts(): Promise<{ slug: string; publishedAt: string }[]> {
   const out: { slug: string; publishedAt: string }[] = [];
+  if (!HAS_API) return out;
   try {
     for (let page = 1; page <= 40; page++) {
       const res = await fetch(`${API_URL}/saas/public/blog?limit=24&page=${page}`, { next: { revalidate: 3600 } });

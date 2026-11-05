@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, Send } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/cn";
-import { API_URL } from "@/lib/site";
+import { API_URL, HAS_API } from "@/lib/site";
 import { InputField } from "@/components/ui/InputField";
 import { PrimaryButton } from "@/components/ui/primary-button";
 import { SIZES, TOPICS, contactSchema, type ContactValues } from "./contactSchema";
@@ -55,6 +55,10 @@ export function ContactForm() {
   };
 
   const onSubmit = async (values: ContactValues) => {
+    if (!HAS_API) {
+      toast.error("The contact form isn't connected yet", { description: "Please try again a little later — we're finishing our setup." });
+      return;
+    }
     const id = toast.loading("Sending your message...", { description: "This only takes a moment." });
     try {
       const res = await fetch(`${API_URL}/saas/public/contact`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(values) });

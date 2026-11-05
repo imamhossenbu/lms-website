@@ -1,4 +1,4 @@
-import { API_URL } from "./site";
+import { API_URL, HAS_API } from "./site";
 
 /** A published post as listed on /blog (no body). Managed in the Owner Console › Blog. */
 export interface BlogCard {
@@ -44,6 +44,7 @@ export async function getBlogPosts(query: BlogQuery): Promise<BlogList | null> {
   if (query.q) qs.set("q", query.q);
   if (query.category) qs.set("category", query.category);
   if (query.page && query.page > 1) qs.set("page", String(query.page));
+  if (!HAS_API) return EMPTY;
   try {
     const res = await fetch(`${API_URL}/saas/public/blog${qs.size ? `?${qs}` : ""}`, { next: { revalidate: 60 } });
     if (res.status === 400) return EMPTY;
@@ -56,6 +57,7 @@ export async function getBlogPosts(query: BlogQuery): Promise<BlogList | null> {
 
 /** One published post, or `null` when it doesn't exist / isn't published. Throws when the API is down. */
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  if (!HAS_API) return null;
   const res = await fetch(`${API_URL}/saas/public/blog/${encodeURIComponent(slug)}`, { next: { revalidate: 60 } });
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`Blog API responded ${res.status}`);

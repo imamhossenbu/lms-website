@@ -1,4 +1,4 @@
-import { API_URL } from "./site";
+import { API_URL, HAS_API } from "./site";
 
 export type FeatureKey =
   | "liveClasses"
@@ -52,6 +52,7 @@ export const yearlySaving = (p: Plan) => (p.priceMonthly > 0 ? Math.max(0, Math.
 
 /** Public, paid plans in price order (server-side; refreshed every 5 minutes). Empty when the API is down. */
 export async function getPlans(): Promise<Plan[]> {
+  if (!HAS_API) return [];
   try {
     const res = await fetch(`${API_URL}/saas/public/plans`, { next: { revalidate: 300 } });
     if (!res.ok) return [];

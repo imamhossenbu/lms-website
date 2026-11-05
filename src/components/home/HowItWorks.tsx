@@ -1,25 +1,44 @@
 import React from "react";
+import { ArrowRight } from "lucide-react";
 import { STEPS } from "@/lib/content";
-import { Reveal } from "@/components/shared/Reveal";
+import { signupUrl } from "@/lib/site";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { StepCard } from "./steps/StepCard";
 
-/** Three numbered steps from sign-up to teaching. */
+/** "How it works": three step cards joined by arrows (desktop) and a trial CTA. */
 export function HowItWorks() {
   return (
-    <section className="bg-gray-bg">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="How it works" title="Up and running in an afternoon" />
-        <ol className="mt-12 grid gap-5 md:grid-cols-3">
+    <section className="relative overflow-hidden">
+      <div className="absolute -left-40 -top-40 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
+      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+        <SectionHeading
+          eyebrow="How it works"
+          title="Get your online academy up and running in 3 simple steps"
+          highlight="in 3 simple steps"
+          highlightOnNewLine
+          subtitle="Set up your academy, add your content and start teaching — it's that simple."
+          className="max-w-4xl"
+        />
+        <ol className="mt-14 flex flex-col items-stretch gap-6 lg:flex-row lg:gap-4">
           {STEPS.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.08}>
-              <li className="relative h-full rounded-2xl border border-dash bg-white p-6">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-orange text-white heading-h6-bold">{i + 1}</span>
-                <h3 className="heading-h5 text-primary-500 mt-5">{s.title}</h3>
-                <p className="body-regular text-primary-300 mt-2">{s.text}</p>
+            <React.Fragment key={s.id}>
+              <li className="flex-1 list-none">
+                <StepCard index={i} />
               </li>
-            </Reveal>
+              {i < STEPS.length - 1 && (
+                <li className="hidden shrink-0 list-none items-center justify-center lg:flex" aria-hidden>
+                  <ArrowRight className="h-6 w-6 text-brand-orange" />
+                </li>
+              )}
+            </React.Fragment>
           ))}
         </ol>
+        <div className="mt-14 flex justify-center">
+          <ButtonLink href={signupUrl()} size="lg" icon={<ArrowRight className="h-5 w-5" />} className="h-14 px-8">
+            Start free trial
+          </ButtonLink>
+        </div>
       </div>
     </section>
   );

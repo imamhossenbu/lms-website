@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Award, BarChart3, Bell, ClipboardList, CreditCard, Globe, MonitorPlay, ShieldCheck, Sparkles, UserCog, Users, Video } from "lucide-react";
+import { Award, BarChart3, Bell, ClipboardList, CreditCard, Globe, Layers, MonitorPlay, Play, ShieldCheck, Sparkles, UserCog, UserPlus, Users, Video } from "lucide-react";
 
 /** Everything the website says about the product, in one place (home + features pages). */
 
@@ -89,10 +89,18 @@ export const EXTRAS: { icon: LucideIcon; title: string; text: string }[] = [
   { icon: ShieldCheck, title: "Secure by default", text: "Password policies, lockout, IP allowlist and daily backups." },
 ];
 
-export const STEPS = [
-  { title: "Create your academy", text: "Sign up, name your institution and pick a plan. Your free trial starts right away." },
-  { title: "Add courses and people", text: "Build courses, invite instructors and enrol students or let them buy online." },
-  { title: "Teach and grow", text: "Run live classes, grade work, issue certificates and watch your numbers grow." },
+export interface Step {
+  id: "create" | "content" | "teach";
+  icon: LucideIcon;
+  tone: ToneKey;
+  title: string;
+  text: string;
+}
+
+export const STEPS: Step[] = [
+  { id: "create", icon: UserPlus, tone: "orange", title: "Create your academy", text: "Sign up, set up your institute and get your own online academy in minutes." },
+  { id: "content", icon: Layers, tone: "blue", title: "Add your content", text: "Build courses, upload lessons, set up live classes, quizzes and assignments." },
+  { id: "teach", icon: Play, tone: "green", title: "Start teaching", text: "Enroll students, take live classes, collect payments and grow your academy." },
 ];
 
 export const FAQS = [

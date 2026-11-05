@@ -93,7 +93,8 @@ export function TestimonialCarousel({ items }: { items: Testimonial[] }) {
     go(Math.round(-projected / step));
   };
 
-  const active = mod(index, Math.max(n, 1));
+  // Dots follow the middle (orange) card.
+  const active = mod(index + centre, Math.max(n, 1));
 
   return (
     <div aria-roledescription="carousel" aria-label="What educators say">

@@ -35,7 +35,7 @@ export function TrustedBy() {
   );
 
   return (
-    <section className="border-y border-dash bg-white py-10" aria-label="Institutions using EduPro">
+    <section className="bg-white py-10" aria-label="Institutions using EduPro">
       <p className="text-center body-sm-medium text-primary-300">Trusted by schools, coaching centres and training institutes</p>
       <div className="relative mt-7 overflow-hidden" onMouseEnter={() => (paused.current = true)} onMouseLeave={() => (paused.current = false)}>
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />

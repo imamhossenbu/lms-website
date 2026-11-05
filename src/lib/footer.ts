@@ -17,7 +17,7 @@ export const FOOTER_COLUMNS: { title: string; links: FooterLink[] }[] = [
   },
   {
     title: "Company",
-    links: [{ label: "About Us" }, { label: "Contact", href: "/contact" }, { label: "Book a Demo", href: "/contact?topic=DEMO" }, { label: "Careers" }],
+    links: [{ label: "About Us", href: "/about" }, { label: "Contact", href: "/contact" }, { label: "Book a Demo", href: "/contact?topic=DEMO" }, { label: "Careers" }],
   },
   {
     title: "Resources",

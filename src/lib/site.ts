@@ -15,10 +15,9 @@ export const loginUrl = () => `${PANEL_URL}/login`;
 /** Main navigation. `mega` = opens the features menu on desktop. */
 export const NAV_LINKS: { href: string; label: string; mega?: boolean }[] = [
   { href: "/features", label: "Features", mega: true },
-  { href: "/#how-it-works", label: "How it works" },
   { href: "/pricing", label: "Pricing" },
   { href: "/blog", label: "Blog" },
-  { href: "/#faq", label: "FAQ" },
+  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 

@@ -988,3 +988,15 @@ body {
     font-size: 20px;
   }
 }
+/* Section titles on the marketing site: 32px on phones, 48px from md up. */
+.heading-section {
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 115%;
+  letter-spacing: -0.03em;
+}
+@media (min-width: 768px) {
+  .heading-section {
+    font-size: 48px;
+  }
+}

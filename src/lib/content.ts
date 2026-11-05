@@ -1,18 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import {
-  Award,
-  BarChart3,
-  BookOpen,
-  ClipboardCheck,
-  CreditCard,
-  Globe,
-  MessagesSquare,
-  Radio,
-  ShieldCheck,
-  Sparkles,
-  Users,
-  Bell,
-} from "lucide-react";
+import { Award, BarChart3, Bell, ClipboardList, CreditCard, Globe, MonitorPlay, ShieldCheck, Sparkles, UserCog, Users, Video } from "lucide-react";
 
 /** Everything the website says about the product, in one place (home + features pages). */
 
@@ -30,26 +17,26 @@ export interface Feature {
 export const FEATURES: Feature[] = [
   {
     id: "courses",
-    icon: BookOpen,
-    tone: "orange",
+    icon: MonitorPlay,
+    tone: "green",
     title: "Courses & lessons",
-    summary: "Build courses with modules, video, text and resources in a guided course builder.",
+    summary: "Create structured courses with videos, files and lessons.",
     points: ["Video, text and downloadable resources", "Drip schedules and prerequisite lessons", "Free preview lessons for visitors", "Categories and sub-categories"],
   },
   {
     id: "live",
-    icon: Radio,
-    tone: "red",
+    icon: Video,
+    tone: "blue",
     title: "Live classes",
-    summary: "Schedule Zoom or Google Meet classes, track attendance and answer questions.",
+    summary: "Run live classes with Zoom or Google Meet integration.",
     points: ["Attendance taken for you", "Q&A and class resources", "Reminders before every class", "Recordings attached afterwards"],
   },
   {
     id: "assessments",
-    icon: ClipboardCheck,
-    tone: "blue",
+    icon: ClipboardList,
+    tone: "purple",
     title: "Quizzes & assignments",
-    summary: "Graded quizzes, rubric-based assignments and instant results for students.",
+    summary: "Test understanding and keep track of student progress.",
     points: ["Multiple choice, true/false and short answers", "Time limits and attempt limits", "Rubrics and written feedback", "Results and insights per question"],
   },
   {
@@ -57,23 +44,23 @@ export const FEATURES: Feature[] = [
     icon: Award,
     tone: "yellow",
     title: "Certificates",
-    summary: "Design certificates once and issue them automatically when a course is completed.",
+    summary: "Issue branded certificates automatically after completion.",
     points: ["Template designer", "Automatic issuing on completion", "Public verification code", "Revoke and restore with a reason"],
   },
   {
     id: "payments",
     icon: CreditCard,
-    tone: "green",
-    title: "Payments",
-    summary: "Sell courses and collect fees with bKash, SSLCommerz or Stripe.",
+    tone: "red",
+    title: "Sell courses & collect fees",
+    summary: "Monetize your courses and collect payments with bKash, SSLCommerz or Stripe.",
     points: ["Orders, refunds and receipts", "Coupons and discounts", "Invoices with your branding", "Revenue reports"],
   },
   {
     id: "community",
-    icon: MessagesSquare,
-    tone: "purple",
-    title: "Community",
-    summary: "Discussions per course where students ask, answer and learn from each other.",
+    icon: Users,
+    tone: "green",
+    title: "Student community",
+    summary: "Keep your learners engaged with a built-in community.",
     points: ["Accepted answers", "Pin, lock and moderate", "Reports and moderation queue", "Tags and categories"],
   },
   {
@@ -81,15 +68,15 @@ export const FEATURES: Feature[] = [
     icon: BarChart3,
     tone: "blue",
     title: "Analytics",
-    summary: "See enrolments, completion, revenue and engagement at a glance.",
+    summary: "See enrolments, revenue and learning progress at a glance.",
     points: ["Course and student progress", "Instructor performance", "Revenue over time", "Export to CSV"],
   },
   {
     id: "team",
-    icon: Users,
-    tone: "orange",
+    icon: UserCog,
+    tone: "purple",
     title: "Team & roles",
-    summary: "Invite instructors and staff with exactly the access they need.",
+    summary: "Manage your team with role-based access and approvals.",
     points: ["Custom roles and permissions", "Two-factor sign-in for admins", "Activity history", "Owner controls"],
   },
 ];
@@ -116,6 +103,3 @@ export const FAQS = [
   { q: "Can I change plans later?", a: "Yes. Upgrade or downgrade any time from Billing in your admin panel; the change is prorated." },
   { q: "Is my data safe?", a: "Each academy's data is kept separate, admin accounts can require two-factor sign-in, and automatic backups run every night." },
 ];
-
-/** Payment gateways the platform supports (shown as a strip, no logos). */
-export const GATEWAYS = ["bKash", "SSLCommerz", "Stripe"];

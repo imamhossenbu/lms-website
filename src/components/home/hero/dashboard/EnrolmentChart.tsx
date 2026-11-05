@@ -27,8 +27,8 @@ function smoothPath(pts: [number, number][]) {
   }, "");
 }
 
-/** "Student Enrolments" line + area chart of the hero dashboard (draws itself in). */
-export function EnrolmentChart({ className }: { className?: string }) {
+/** Enrolments line + area chart of the dashboard mocks (draws itself in); optional trend badge next to the title. */
+export function EnrolmentChart({ className, title = "Student Enrolments", badge }: { className?: string; title?: string; badge?: React.ReactNode }) {
   const pts = VALUES.map((v, i) => [x(i), y(v)] as [number, number]);
   const line = smoothPath(pts);
   const area = `${line} L ${W} ${H} L 0 ${H} Z`;
@@ -36,7 +36,10 @@ export function EnrolmentChart({ className }: { className?: string }) {
 
   return (
     <div className={cn("rounded-xl border border-dash bg-white p-4 shadow-xs", className)}>
-      <span className="body-sm-medium text-primary-500">Student Enrolments</span>
+      <div className="flex items-center justify-between gap-2">
+        <span className="body-sm-medium text-primary-500">{title}</span>
+        {badge}
+      </div>
       <div className="mt-3 flex gap-2">
         <div className="flex flex-col justify-between pb-5 body-2xsm-regular text-primary-300 text-right">
           {TICKS.map((t) => (

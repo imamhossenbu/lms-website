@@ -1,27 +1,22 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
-import { signupUrl } from "@/lib/site";
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Reveal } from "@/components/shared/Reveal";
+import { CtaCopy } from "./cta/CtaCopy";
+import { CtaVisual } from "./cta/CtaVisual";
+import { CtaWaves } from "./cta/CtaWaves";
 
-/** Orange closing banner with the two main actions. */
+/** Closing banner: the product on a tilted device (left) and "Start your online academy" with the main actions (right). */
 export function FinalCta() {
   return (
-    <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
-      <Reveal>
-        <div className="rounded-3xl bg-brand-orange px-6 py-14 text-center sm:px-12">
-          <h2 className="heading-h2-bold text-white">Ready to take your academy online?</h2>
-          <p className="body-l-medium text-white/85 mt-3 max-w-xl mx-auto">Start your free trial today, or talk to us and we&apos;ll show you around.</p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <ButtonLink href={signupUrl()} size="lg" variant="light" icon={<ArrowRight className="h-4 w-4" />}>
-              Start free trial
-            </ButtonLink>
-            <ButtonLink href="/contact?topic=DEMO" size="lg" variant="ghost" className="text-white hover:text-white hover:bg-white/10">
-              Book a demo
-            </ButtonLink>
-          </div>
+    <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-orange-soft via-white to-brand-orange-light">
+      <div className="absolute -left-40 -top-40 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
+      <CtaWaves />
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-24 sm:px-6 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-6">
+          <CtaVisual />
         </div>
-      </Reveal>
+        <div className="lg:col-span-6 lg:pl-6">
+          <CtaCopy />
+        </div>
+      </div>
     </section>
   );
 }

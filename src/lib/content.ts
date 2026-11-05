@@ -104,10 +104,28 @@ export const STEPS: Step[] = [
 ];
 
 export const FAQS = [
-  { q: "Who is EduPro for?", a: "Schools, coaching centres, training institutes and independent teachers who want to teach online, sell courses and manage students in one place." },
-  { q: "Is there a free trial?", a: "Yes. Every paid plan starts with a free trial, so you can set up your academy and try every feature of the plan before you pay." },
-  { q: "Which payment methods can my students use?", a: "You can connect bKash, SSLCommerz and Stripe. Students pay for courses on your academy and you see every order and refund in the admin panel." },
-  { q: "Can I use my own domain and branding?", a: "Yes. The Pro plan and above let you connect your own domain and remove EduPro branding." },
-  { q: "Can I change plans later?", a: "Yes. Upgrade or downgrade any time from Billing in your admin panel; the change is prorated." },
-  { q: "Is my data safe?", a: "Each academy's data is kept separate, admin accounts can require two-factor sign-in, and automatic backups run every night." },
+  {
+    q: "What is EduPro?",
+    a: "EduPro is a complete LMS platform for schools, coaching centres and training institutes to create courses, take live classes, run quizzes, issue certificates, sell courses and collect payments online.",
+  },
+  {
+    q: "Who can use EduPro?",
+    a: "Schools, colleges, coaching centres, training institutes and independent teachers. You get your own academy with an admin panel for your team, and a learning space for your students.",
+  },
+  {
+    q: "Can I run live classes on EduPro?",
+    a: "Yes. Schedule classes on Zoom or Google Meet, send reminders, take attendance automatically and answer questions — all from the Live Classes screen. Live classes are included from the Growth plan.",
+  },
+  {
+    q: "What payment methods are supported?",
+    a: "You can collect course fees with bKash, SSLCommerz and Stripe. Every order, refund and receipt shows up in your admin panel.",
+  },
+  {
+    q: "Can I try EduPro before buying?",
+    a: "Yes. Every paid plan starts with a free trial, so you can set up your academy and try every feature of the plan before you pay.",
+  },
+  {
+    q: "Can I upgrade or change my plan later?",
+    a: "Of course. Upgrade, downgrade or switch between monthly and yearly billing any time from Billing in your admin panel; the change is prorated.",
+  },
 ];

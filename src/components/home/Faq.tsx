@@ -1,44 +1,40 @@
 "use client";
 
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { FAQS } from "@/lib/content";
+import { signupUrl } from "@/lib/site";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { FaqIllustration } from "./faq/FaqIllustration";
+import { FaqItem } from "./faq/FaqItem";
 
-/** Accordion of common questions (one open at a time). */
+/** "Have questions? We've got answers": illustration + accordion (one open at a time) + trial CTA. */
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-      <SectionHeading eyebrow="FAQ" title="Questions, answered" />
-      <div className="mt-10 divide-y divide-dash rounded-2xl border border-dash bg-white">
-        {FAQS.map((f, i) => {
-          const isOpen = open === i;
-          return (
-            <div key={f.q}>
-              <button
-                type="button"
-                onClick={() => setOpen(isOpen ? null : i)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
-                aria-expanded={isOpen}
-                aria-controls={`faq-${i}`}
-              >
-                <span className="body-medium text-primary-500">{f.q}</span>
-                <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }} className="text-primary-300">
-                  <ChevronDown className="h-5 w-5" />
-                </motion.span>
-              </button>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div id={`faq-${i}`} initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
-                    <p className="px-5 pb-5 body-regular text-primary-300">{f.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
+    <section className="relative overflow-hidden">
+      <div className="absolute -right-40 bottom-0 -z-10 h-128 w-128 rounded-full bg-brand-orange-10 blur-3xl" aria-hidden />
+      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6">
+        <SectionHeading eyebrow="Frequently asked questions" title="Have questions? We've got answers" highlight="answers" subtitle="Everything you need to know about EduPro, in one place." className="max-w-4xl" />
+        <div className="mt-14 grid items-center gap-10 lg:grid-cols-12">
+          <div className="hidden lg:col-span-5 lg:block">
+            <FaqIllustration />
+          </div>
+          <Stagger className="space-y-3 lg:col-span-7" stagger={0.06}>
+            {FAQS.map((f, i) => (
+              <StaggerItem key={f.q}>
+                <FaqItem id={`faq-${i}`} question={f.q} answer={f.a} open={open === i} onToggle={() => setOpen(open === i ? null : i)} />
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+        <div className="mt-14 flex justify-center">
+          <ButtonLink href={signupUrl()} size="lg" icon={<ArrowRight className="h-5 w-5" />} className="h-14 px-8">
+            Start free trial
+          </ButtonLink>
+        </div>
       </div>
     </section>
   );

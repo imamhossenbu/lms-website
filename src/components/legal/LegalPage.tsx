@@ -20,7 +20,7 @@ export function LegalPage({ doc }: { doc: LegalDoc }) {
           </ToneBadge>
         </div>
       </PageHero>
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-24 sm:px-6 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 pb-24 pt-14 sm:px-6 lg:grid-cols-12">
         <article className="min-w-0 lg:col-span-8">
           <LegalKeyPoints points={doc.keyPoints} />
           <div className="mt-6">

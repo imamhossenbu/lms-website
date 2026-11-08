@@ -6,6 +6,8 @@ import { ArrowRight, Building2, Check, Crown, Gem, Rocket, type LucideIcon } fro
 import { cn } from "@/lib/cn";
 import { formatPrice, planHighlights, yearlySaving, type Plan } from "@/lib/plans";
 import { signupUrl } from "@/lib/site";
+import { checkoutUrl } from "@/lib/checkout";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Spotlight } from "@/components/motion/Spotlight";
 import { PlanPrice } from "./PlanPrice";
@@ -21,7 +23,7 @@ interface PlanCardProps {
   index?: number;
 }
 
-/** One plan: icon, name, tagline, price for the cycle, four selling points and a trial button (pre-selects the plan). */
+/** One plan: icon, name, tagline, price for the cycle, four selling points, "Buy now" (website checkout) and a free-trial link (panel sign-up; both pre-select the plan). */
 export function PlanCard({ plan, plans, cycle, index = 0 }: PlanCardProps) {
   const yearly = cycle === "YEARLY";
   const Icon = PLAN_ICONS[Math.min(index, PLAN_ICONS.length - 1)];
@@ -72,14 +74,17 @@ export function PlanCard({ plan, plans, cycle, index = 0 }: PlanCardProps) {
           </ul>
 
           <ButtonLink
-            href={signupUrl(plan.id, cycle)}
+            href={checkoutUrl(plan.id, cycle)}
             variant={popular ? "primary" : "secondary"}
             size="lg"
             icon={<ArrowRight className="h-4 w-4" />}
             className="mt-8 h-14 w-full"
           >
-            Start free trial
+            Buy now
           </ButtonLink>
+          <Link href={signupUrl(plan.id, cycle)} className="mt-3 text-center body-sm-medium text-primary-400 transition-colors hover:text-brand-orange">
+            or start a {plan.trialDays > 0 ? `${plan.trialDays}-day ` : ""}free trial
+          </Link>
         </div>
       </Spotlight>
     </motion.div>

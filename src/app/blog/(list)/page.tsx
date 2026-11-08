@@ -34,7 +34,7 @@ export default async function BlogPage({ searchParams }: { searchParams: Promise
         highlight="growing online"
         subtitle="Practical guides on courses, live classes, assessments and payments — written for schools, coaching centres and training institutes."
       />
-      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6">
+      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 sm:px-6">
         {!list ? (
           <BlogEmpty kind="error" />
         ) : nothing && !filtered ? (

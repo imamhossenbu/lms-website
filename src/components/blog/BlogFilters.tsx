@@ -43,8 +43,9 @@ export function BlogFilters({ categories }: { categories: { name: string; count:
   const chips = [{ name: "", label: "All posts", count: categories.reduce((n, c) => n + c.count, 0) }, ...categories.map((c) => ({ name: c.name, label: c.name, count: c.count }))];
 
   return (
-    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <div className="flex gap-2 overflow-x-auto pb-1" role="tablist" aria-label="Categories">
+    <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+      {/* Phones: one swipeable row. Wider screens: chips wrap so every category stays visible. */}
+      <div className="flex min-w-0 flex-1 gap-2 overflow-x-auto pb-1 md:flex-wrap md:overflow-visible" role="tablist" aria-label="Categories">
         {chips.map((c) => {
           const on = c.name === active;
           return (
@@ -64,7 +65,7 @@ export function BlogFilters({ categories }: { categories: { name: string; count:
           );
         })}
       </div>
-      <label className="relative block w-full md:w-72">
+      <label className="relative block w-full shrink-0 md:w-72">
         <span className="sr-only">Search articles</span>
         {pending ? <Loader2 className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 animate-spin text-brand-orange" /> : <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-primary-300" />}
         <input
